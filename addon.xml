@@ -1,0 +1,33 @@
+﻿<addon id="plugin.video.ivysilani" name="iVysílání" provider-name="waladir" version="2.0.3">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+    <import addon="script.module.inputstreamhelper" version="0.4.2"/>        
+  </requires>
+  <extension library="main.py" point="xbmc.python.pluginsource">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="cs_CZ">iVysílání</summary>
+    <description lang="cs_CZ">
+Doplněk pro iVysílání České televize
+    </description>    
+    <platform>all</platform>
+    <news>
+v2.0.3 (8.12.2024)
+- úprava pro Kodi Leia
+
+v2.0.2 (7.12.2024)
+- oprava vyhledávání
+- DRM u živého vysílání
+
+v2.0.1 (7.12.2024)
+- ošetření DRM
+
+v2.0.0 (6.12.2024)
+- první verze
+    </news>
+    <assets>
+        <icon>icon.png</icon>
+    </assets>
+  </extension>
+</addon>
