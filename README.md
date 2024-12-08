@@ -2,7 +2,7 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
-v2.0.5 (8.12.2024)<br>
+v2.0.5/6 (8.12.2024)<br>
 - fix pro Kodi Leia (díky @Roman Štefko)<br><br>
 
 v2.0.4 (8.12.2024)<br>
