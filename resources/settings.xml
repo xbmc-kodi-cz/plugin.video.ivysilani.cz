@@ -2,7 +2,6 @@
 <settings>
 	<category label="Nastavení">
         <setting label="Počet položek na stránku" type="slider" id="pagesize" range="1, 1, 10" default="30" option="int"/>
-        <setting label="Vynutit DRM u živého vysílání" type="bool" id="force_drm" default="false"/>
         <setting label="Logovat požadavky" type="bool" id="log_requests" default="false"/>
         <setting label="InputStream Helper/Widevine" type="lsep"/>
         <setting label="Zobrazení informací" type="action" action="RunScript(script.module.inputstreamhelper,info)"/>
