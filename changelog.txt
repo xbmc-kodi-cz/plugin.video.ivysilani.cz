@@ -1,5 +1,4 @@
 v2.0.3 (8.12.2024)
-- možnost vynutit použití DRM u živého vysílání
 - úprava pro Kodi Leia
 
 v2.0.2 (7.12.2024)

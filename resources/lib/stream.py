@@ -11,8 +11,7 @@ if len(sys.argv) > 1:
     _handle = int(sys.argv[1])
 
 def play_channel(channelId):
-    addon = xbmcaddon.Addon()
-    data = call_api(url = 'https://api.ceskatelevize.cz/video/v1/playlist-live/v1/stream-data/channel/' + channelId + '?canPlayDrm=' + str(addon.getSetting('force_drm')) + '&streamType=dash&quality=web&maxQualityCount=5')
+    data = call_api(url = 'https://api.ceskatelevize.cz/video/v1/playlist-live/v1/stream-data/channel/' + channelId + '?canPlayDrm=false&streamType=dash&quality=web&maxQualityCount=5')
     if 'streamUrls' not in data or 'main' not in data['streamUrls']:
         xbmcgui.Dialog().notification('iVysílání', 'Chyba při přehrání pořadu', xbmcgui.NOTIFICATION_ERROR, 5000)
     else:
