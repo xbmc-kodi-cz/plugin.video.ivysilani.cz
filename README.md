@@ -2,6 +2,9 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.0.4 (8.12.2024)<br>
+- oprava vyhledávání<br><br>
+
 v2.0.3 (8.12.2024)<br>
 - úprava pro Kodi Leia<br><br>
 
