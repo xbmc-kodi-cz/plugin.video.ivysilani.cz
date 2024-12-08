@@ -1,3 +1,6 @@
+v2.0.5 (8.12.2024)
+- fix pro Kodi Leia (díky @Roman Štefko)
+
 v2.0.4 (8.12.2024)
 - oprava vyhledávání
 
@@ -10,6 +13,3 @@ v2.0.2 (7.12.2024)
 
 v2.0.1 (7.12.2024)
 - ošetření DRM
-
-v2.0.0 (6.12.2024)
-- první verze
