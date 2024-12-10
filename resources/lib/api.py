@@ -27,17 +27,12 @@ GRAPHQL = {'LiveBroadcastFind' : '{"persistedQuery":{"version":1,"sha256Hash":"b
            'TvProgramDaily' : '{"persistedQuery":{"version":1,"sha256Hash":"661cff054ced91ce2671f85bd398bee5ea5686a2d3f56f46ef5ce19b1ec632a4"}}',
            'TvProgramDailyTablet' : '{"persistedQuery":{"version":1,"sha256Hash":"e661b593b712f0b533a989d75413136bf4459dcf0ee13522538145cd74cad1b3"}}'
           }
-#https://api.ceskatelevize.cz/graphql/?client=iVysilaniWeb&version=1.124.1&use-new-playability=true&operationName=HomepageConfigQuery&variables={}&extensions={"persistedQuery":{"version":1,"sha256Hash":"3baa90011284bfaaa256cfcca1366b41166684873c42ee66851740f7060935d8"}}
-#https://api.ceskatelevize.cz/graphql/?client=iVysilaniWeb&version=1.124.1&use-new-playability=true&operationName=HomepageBlockQuery&variables={"id":"100100","limit":12,"offset":0}&extensions={"persistedQuery":{"version":1,"sha256Hash":"0d1334d988371c8b3bbeea4ad0eb66b3c31abb0760f6b79efc2f78051a31f75d"}}
-
-#https://api.ceskatelevize.cz/graphql/?client=iVysilaniWeb&version=1.124.1&use-new-playability=true&operationName=GetRelatedProgrammes&variables={"id":"15349949706","limit":4,"source":"AVRO_B"}&extensions={"persistedQuery":{"version":1,"sha256Hash":"bb7797151cf99e3157d206299cc212616ec198d0d653a67fa261c7735bd3a941"}}
-#https://api.ceskatelevize.cz/graphql/?client=iVysilaniWeb&version=1.124.0&use-new-playability=true&operationName=NextEpisode&variables={"currentEpisodeIdec":"22054416016"}&extensions={"persistedQuery":{"version":1,"sha256Hash":"ffd1efa0e54a8904b041378eb63173bbde321b14e153e04632e1c4b309836408"}}
-#https://api.ceskatelevize.cz/graphql/?client=iVysilaniWeb&version=1.124.0&use-new-playability=true&operationName=Medium&variables={"id":"22054416016","includeLiveEncoder":false}&extensions={"persistedQuery":{"version":1,"sha256Hash":"9db47789e7af5c226984188c2a2fe4479d11b2be4e1f33de5989548b436a61cd"}}
-#https://api.ceskatelevize.cz/graphql/?client=iVysilaniWeb&version=1.124.0&use-new-playability=true&operationName=SearchEpisodes&variables={"limit":5,"offset":0,"search":"test","onlyPlayable":false}&extensions={"persistedQuery":{"version":1,"sha256Hash":"2d1f7dfd3a5d043891fd7a761fa592ef776923572bbf440e25dde6c29b4f0ad1"}}
 
 def call_graphql(operationName, variables):
     url = graphql_url + 'operationName=' + operationName + '&variables=' + variables + '&extensions=' + GRAPHQL[operationName]
     data = call_api(url = url)
+    if 'errors' in data and data['errors'] and 'message' in data['errors'][0] and data['errors'][0]['message'] == 'PersistedQueryNotFound':
+        data = call_api(url = url)
     if 'data' not in data or data['data'] is None:
         return None
     for result in data['data']:

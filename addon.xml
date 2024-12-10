@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.0.6">
+﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.0.2">
   <requires>
     <import addon="xbmc.python" version="2.24.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>        
@@ -13,6 +13,13 @@ Doplněk pro iVysílání České televize
     </description>    
     <platform>all</platform>
     <news>
+v2.0.7 (10.12.2024)
+- u seriálů je možné v kontextovém menu přejít na seznam epizod pořadu
+- přidaná možnost přes kontextové menu přidat pořad mezi oblíbené (mimo živé vysílání)
+- nastavení typu obsahu
+- opakování volání při chybě PersistedQueryNotFound
+- přidaná podpora titulků (díky Martinovi Peckovi)
+
 v2.0.5/6 (8.12.2024)
 - fix pro Kodi Leia (díky @Roman Štefko)
 
@@ -25,9 +32,6 @@ v2.0.3 (8.12.2024)
 v2.0.2 (7.12.2024)
 - oprava vyhledávání
 - DRM u živého vysílání
-
-v2.0.1 (7.12.2024)
-- ošetření DRM
     </news>
     <assets>
         <icon>icon.png</icon>
