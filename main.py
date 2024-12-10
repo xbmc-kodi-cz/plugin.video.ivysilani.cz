@@ -15,6 +15,7 @@ from resources.lib.category import list_categories, list_subcategories, list_cat
 from resources.lib.stream import play_channel, play_id
 from resources.lib.archive import list_archive, list_archive_days, list_program
 from resources.lib.search import list_search, delete_search, program_search
+from resources.lib.favourites import list_favourites, add_favourite, remove_favourite
 from resources.lib.utils import get_url
 
 if len(sys.argv) > 1:
@@ -46,6 +47,11 @@ def list_menu():
     list_item = xbmcgui.ListItem(label = 'Kategorie')
     url = get_url(action='list_categories', label = 'Kategorie')  
     list_item.setArt({ 'thumb' : os.path.join(icons_dir , 'categories.png'), 'icon' : os.path.join(icons_dir , 'categories.png') })
+    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+
+    list_item = xbmcgui.ListItem(label = 'Oblíbené')
+    url = get_url(action='list_favourites', label = 'Oblíbené')  
+    list_item.setArt({ 'thumb' : os.path.join(icons_dir , 'favourites.png'), 'icon' : os.path.join(icons_dir , 'favourites.png') })
     xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
 
     list_item = xbmcgui.ListItem(label = 'Vyhledávání')
@@ -91,6 +97,13 @@ def router(paramstring):
             program_search(params['query'], params['label'], params['page'])
         elif params['action'] == 'delete_search':
             delete_search(params['query'])
+
+        elif params['action'] == 'list_favourites':
+            list_favourites(params['label'])
+        elif params['action'] == 'add_favourite':
+            add_favourite(params['item'])
+        elif params['action'] == 'remove_favourite':
+            remove_favourite(params['item'])            
 
         elif params['action'] == 'list_settings':
             list_settings(params['label'])

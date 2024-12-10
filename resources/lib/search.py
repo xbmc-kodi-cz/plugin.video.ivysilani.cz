@@ -19,6 +19,7 @@ import math
 
 from resources.lib.api import call_graphql
 from resources.lib.category import get_show_listitem
+from resources.lib.favourites import get_favourites
 from resources.lib.utils import get_url, plugin_id
 
 _handle = int(sys.argv[1])
@@ -40,6 +41,7 @@ def program_search(query, label, page):
     addon = xbmcaddon.Addon()
     icons_dir = os.path.join(addon.getAddonInfo('path'), 'resources','images')
     xbmcplugin.setPluginCategory(_handle, label)
+    xbmcplugin.setContent(_handle, 'movies')
     if query == '-----':
         input = xbmc.Keyboard('', 'Hledat')
         input.doModal()
@@ -67,8 +69,13 @@ def program_search(query, label, page):
                 list_item.setArt({ 'thumb' : os.path.join(icons_dir , 'previous_arrow.png'), 'icon' : os.path.join(icons_dir , 'previous_arrow.png') })
                 xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
 
+            favourites = get_favourites()
             for item in data['items']:
-                get_show_listitem(label, item['id'])
+                if int(item['id']) in favourites:
+                    favourite = True
+                else:
+                    favourite = False
+                get_show_listitem(label, item['id'], favourite)
 
             if  totalCount > int(offset) + pagesize:
                 list_item = xbmcgui.ListItem(label='Následující strana (' + str(int(page) + 1) + '/' + str(math.ceil(totalCount/pagesize)) + ')')
@@ -77,7 +84,6 @@ def program_search(query, label, page):
                 xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
 
             xbmcplugin.endOfDirectory(_handle, cacheToDisc = False)                  
-
         else:
             xbmcgui.Dialog().notification('iVysíláni','Nic nenalezeno', xbmcgui.NOTIFICATION_INFO, 3000)
 

@@ -1,11 +1,22 @@
 # -*- coding: utf-8 -*-
 import sys
+import os
 import xbmcgui
 import xbmcplugin
 import xbmcaddon
 
+try:
+    from xbmcvfs import translatePath
+except ImportError:
+    from xbmc import translatePath
+
+try:
+    from urllib.request import urlopen # type: ignore
+except ImportError:
+    from urllib2 import urlopen # type: ignore
+
 from resources.lib.api import call_api
-from resources.lib.utils import PY2
+from resources.lib.utils import PY2, iso639map
 
 if len(sys.argv) > 1:
     _handle = int(sys.argv[1])
@@ -45,17 +56,25 @@ def play_url(url, subtitles=[]):
     list_item.setProperty('inputstream.adaptive.manifest_type', 'mpd')        
     list_item.setContentLookup(False)
     if len(subtitles) > 0:
-        sub_langs = []
+        addon = xbmcaddon.Addon()
+        addon_userdata_dir = translatePath(addon.getAddonInfo('profile'))
+        if not os.path.exists(addon_userdata_dir):
+            os.makedirs(addon_userdata_dir)    
+        filelist = os.listdir(addon_userdata_dir)
+        for filename in filelist:
+            if filename.endswith(".sub"):
+                os.remove(os.path.join(addon_userdata_dir, filename))            
         subs = []
         for sub_lang in subtitles:
             lang = sub_lang['language']
             for sub in sub_lang['files']:
-                sub_langs.append(lang)
-                subs.append(sub['url'])
+                response = urlopen(sub['url'])
+                filename = os.path.join(addon_userdata_dir, iso639map[lang] + '.sub') 
+                subs.append(filename)
+                with open(filename, 'wb') as f:
+                    f.write(response.read())
                 break  # There are multiple formats, but we are only interested in one per language
         list_item.setSubtitles(subs)
-        for i in range(len(sub_langs)):
-            list_item.setProperty('SubtitleLanguage.%i' % (i + 1,), sub_langs[i])
 
 
     xbmcplugin.setResolvedUrl(_handle, True, list_item)                        
