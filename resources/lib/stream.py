@@ -15,7 +15,7 @@ try:
 except ImportError:
     from urllib2 import urlopen # type: ignore
 
-from resources.lib.api import call_api
+from resources.lib.api import call_api, call_graphql
 from resources.lib.utils import PY2, iso639map
 
 if len(sys.argv) > 1:
@@ -40,6 +40,18 @@ def play_id(id):
         url = data['streams'][0]['url']
         subtitles = data['streams'][0].get('subtitles', [])
         play_url(url, subtitles)
+
+def play_from_url(url):
+    if '/' in url:
+        if url[-1] == '/':
+            url = url[:-1]
+        print(url)
+        uri = url.split('/')[-1]
+        if '-' in uri:
+            id = uri.split('-')[0]
+            data = call_graphql(operationName = 'Show', variables = '{"id":"' + str(id) + '"}')
+            idec = data['idec']
+            play_id(idec)
 
 def play_url(url, subtitles=[]):
     list_item = xbmcgui.ListItem(path = url)

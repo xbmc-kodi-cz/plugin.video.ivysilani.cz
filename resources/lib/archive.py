@@ -21,7 +21,7 @@ def list_archive(label):
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba načtení kanálů', xbmcgui.NOTIFICATION_ERROR, 5000)
     else:
         for item in data:
-            if item['channelAsString'] != 'ctSportExtra':
+            if item['channelAsString'] not in ['ctSportExtra', 'iVysilani']:
                 list_item = xbmcgui.ListItem(label = item['channelSettings']['channelName'])
                 url = get_url(action='list_archive_days', channel = item['channelAsString'], label = label + ' / ' + encode(item['channelSettings']['channelName']))  
                 xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
@@ -56,9 +56,10 @@ def list_program(label, channel, day_min):
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba při načtení pořadů', xbmcgui.NOTIFICATION_ERROR, 5000)        
     else:
         favourites = get_favourites()
+        tz_offset = int(time.mktime(datetime.now().timetuple())-time.mktime(datetime.utcnow().timetuple()))
         for item in data[0]['program']:
-            startTime = time.mktime(time.strptime(item['start'][:-5], '%Y-%m-%dT%H:%M:%S')) + 3600
-            endTime = time.mktime(time.strptime(item['end'][:-5], '%Y-%m-%dT%H:%M:%S')) + 3600
+            startTime = time.mktime(time.strptime(item['start'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset
+            endTime = time.mktime(time.strptime(item['end'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset
             if 'idec' in item and item['idec'] is not None and 'isPlayableNow' in item and item['isPlayableNow'] == True:
                 title = day_translation_short[(datetime.fromtimestamp(startTime)).strftime('%w')] + ' ' + datetime.fromtimestamp(startTime).strftime('%d.%m %H:%M') + ' - ' + datetime.fromtimestamp(endTime).strftime('%H:%M') + ' | ' + encode(item['title'])
                 if int(item['sidp']) in favourites:
