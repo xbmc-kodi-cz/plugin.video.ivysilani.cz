@@ -12,7 +12,7 @@ except ImportError:
 
 from resources.lib.live import list_channels
 from resources.lib.category import list_categories, list_subcategories, list_category, list_series
-from resources.lib.stream import play_channel, play_id
+from resources.lib.stream import play_channel, play_id, play_from_url
 from resources.lib.archive import list_archive, list_archive_days, list_program
 from resources.lib.search import list_search, delete_search, program_search
 from resources.lib.favourites import list_favourites, add_favourite, remove_favourite
@@ -83,6 +83,8 @@ def router(paramstring):
             list_channels(params['label'])
         elif params['action'] == 'play_channel':
             play_channel(params['channelId'])
+        elif params['action'] == 'play_url':
+            play_from_url(params['url'])
 
         elif params['action'] == 'list_archive':
             list_archive(params['label'])

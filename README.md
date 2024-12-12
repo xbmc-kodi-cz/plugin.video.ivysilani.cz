@@ -2,6 +2,12 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.0.8 (12.12.2024)<br>
+- doplnění informací a funkčností pro živé vysílání<br>
+- ošetření chyb v datech<br>
+- přidaná možnost externího spuštění streamu se zadáním URL z webu (play_url)<br>
+- v nastavení lze nastavit třídění pořadů v kategoriích<br><br>
+
 v2.0.7 (10.12.2024)<br>
 - u seriálů je možné v kontextovém menu přejít na seznam epizod pořadu<br>
 - přidaná možnost přes kontextové menu přidat pořad mezi oblíbené (mimo živé vysílání)<br>
@@ -17,8 +23,4 @@ v2.0.4 (8.12.2024)<br>
 
 v2.0.3 (8.12.2024)<br>
 - úprava pro Kodi Leia<br><br>
-
-v2.0.2 (7.12.2024)<br>
-- oprava vyhledávání<br>
-- DRM u živého vysílání<br><br>
 </p>

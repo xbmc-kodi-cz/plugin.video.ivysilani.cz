@@ -2,6 +2,7 @@
 <settings>
 	<category label="Nastavení">
         <setting label="Počet položek na stránku" type="slider" id="pagesize" range="1, 1, 30" default="10" option="int"/>
+        <setting label="Řazení v kategoriích" type="select" id="categories_order" values="od nejsledovanějších|od nejnovějších|abecedně" default="od nejsledovanějších"/>
         <setting label="Logovat požadavky" type="bool" id="log_requests" default="false"/>
         <setting label="InputStream Helper/Widevine" type="lsep"/>
         <setting label="Zobrazení informací" type="action" action="RunScript(script.module.inputstreamhelper,info)"/>
