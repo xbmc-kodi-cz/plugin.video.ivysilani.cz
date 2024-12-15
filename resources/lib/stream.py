@@ -4,11 +4,14 @@ import os
 import xbmcgui
 import xbmcplugin
 import xbmcaddon
+import re
 
 try:
     from xbmcvfs import translatePath
 except ImportError:
     from xbmc import translatePath
+
+import base64
 
 try:
     from urllib.request import urlopen # type: ignore
@@ -42,16 +45,20 @@ def play_id(id):
         play_url(url, subtitles)
 
 def play_from_url(url):
-    if '/' in url:
-        if url[-1] == '/':
-            url = url[:-1]
-        print(url)
-        uri = url.split('/')[-1]
-        if '-' in uri:
-            id = uri.split('-')[0]
-            data = call_graphql(operationName = 'Show', variables = '{"id":"' + str(id) + '"}')
-            idec = data['idec']
-            play_id(idec)
+    #see https://regex101.com/r/Ay3RyM/1
+    m = re.search(r"/(?P<show_id>\d+)-([^/]+/(?P<episode_idec>\d+)/?)?", url)
+    show_id = m.group("show_id") if m else None
+    if not show_id:
+        xbmcgui.Dialog().notification('iVysílání', 'Nepodařilo se zjistit ID pořadu', xbmcgui.NOTIFICATION_ERROR, 5000)
+        return
+    idec = m.group("episode_idec") if m else None #series has idec in url
+    if not idec: #movies must be resolved by calling graphql
+        data = call_graphql(operationName = 'Show', variables = '{"id":"' + str(show_id) + '"}')
+        if not data or 'idec' not in data:
+            xbmcgui.Dialog().notification('iVysílání', 'Pořad %s není k dispozici' % str(show_id), xbmcgui.NOTIFICATION_ERROR, 5000)
+            return
+        idec = data['idec']
+    play_id(idec)
 
 def play_url(url, subtitles=[]):
     list_item = xbmcgui.ListItem(path = url)
@@ -87,6 +94,4 @@ def play_url(url, subtitles=[]):
                     f.write(response.read())
                 break  # There are multiple formats, but we are only interested in one per language
         list_item.setSubtitles(subs)
-
-
     xbmcplugin.setResolvedUrl(_handle, True, list_item)                        

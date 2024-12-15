@@ -117,7 +117,7 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None):
             infotag = list_item.getVideoInfoTag()
             infotag.setMediaType('movie')
         else:
-            list_item.setInfo('video', {'mediatype' : 'movie'})        
+            list_item.setInfo('video', {'mediatype' : 'movie'})     
         list_item.setArt({'thumb': data['images']['card'], 'poster' : data['images']['card']})
         if 'shortDescription' in data and data['shortDescription'] is not None:
             if kodi_version >= 20:
