@@ -2,6 +2,10 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.0.9 (15.12.2024)<br>
+- úprava parsování URL od dimov-cz<br>
+- přidání dočasných kanálů do živého vysílání<br><br>
+
 v2.0.8 (12.12.2024)<br>
 - doplnění informací a funkčností pro živé vysílání<br>
 - ošetření chyb v datech<br>
@@ -20,7 +24,4 @@ v2.0.5/6 (8.12.2024)<br>
 
 v2.0.4 (8.12.2024)<br>
 - oprava vyhledávání<br><br>
-
-v2.0.3 (8.12.2024)<br>
-- úprava pro Kodi Leia<br><br>
 </p>

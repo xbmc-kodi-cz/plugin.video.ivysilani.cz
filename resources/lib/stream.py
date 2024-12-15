@@ -5,12 +5,13 @@ import xbmcgui
 import xbmcplugin
 import xbmcaddon
 import re
-import logging
 
 try:
     from xbmcvfs import translatePath
 except ImportError:
     from xbmc import translatePath
+
+import base64
 
 try:
     from urllib.request import urlopen # type: ignore
@@ -93,6 +94,4 @@ def play_url(url, subtitles=[]):
                     f.write(response.read())
                 break  # There are multiple formats, but we are only interested in one per language
         list_item.setSubtitles(subs)
-
-
     xbmcplugin.setResolvedUrl(_handle, True, list_item)                        

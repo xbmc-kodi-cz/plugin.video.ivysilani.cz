@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.0.8">
+﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.0.9">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>        
@@ -13,6 +13,10 @@ Doplněk pro iVysílání České televize
     </description>    
     <platform>all</platform>
     <news>
+v2.0.9 (15.12.2024)
+- úprava parsování URL od dimov-cz
+- přidání dočasných kanálů do živého vysílání
+
 v2.0.8 (12.12.2024)
 - doplnění informací a funkčností pro živé vysílání
 - ošetření chyb v datech
@@ -31,9 +35,6 @@ v2.0.5/6 (8.12.2024)
 
 v2.0.4 (8.12.2024)
 - oprava vyhledávání
-
-v2.0.3 (8.12.2024)
-- úprava pro Kodi Leia
     </news>
     <assets>
         <icon>icon.png</icon>
