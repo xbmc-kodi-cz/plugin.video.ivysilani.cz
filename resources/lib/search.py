@@ -18,7 +18,7 @@ except ImportError:
 import math 
 
 from resources.lib.api import call_graphql
-from resources.lib.category import get_show_listitem
+from resources.lib.items import get_show_listitem
 from resources.lib.favourites import get_favourites
 from resources.lib.utils import get_url, plugin_id
 
