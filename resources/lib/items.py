@@ -163,7 +163,7 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None):
             list_item.setProperty('IsPlayable', 'true')       
             list_item.setContentLookup(False)          
         if item_data['showType'] in ['series', 'magazine']:
-            menus.append(('Přejít na pořad...', 'Container.Update(' + get_url(action = 'list_series', label = item_data['title'], id = str(idec), page = 1) + ')'))
+            menus.append(('Přejít na pořad...', 'Container.Update(' + get_url(action = 'list_series', label = encode(item_data['title']), id = str(idec), page = 1) + ')'))
         if kodi_version >= 20:
             infotag = list_item.getVideoInfoTag()
             infotag.setMediaType('movie')
