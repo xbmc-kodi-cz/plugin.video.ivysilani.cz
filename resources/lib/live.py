@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 
 from resources.lib.api import call_graphql
-from resources.lib.category import get_show_listitem
+from resources.lib.items import get_show_listitem
 from resources.lib.favourites import get_favourites
 from resources.lib.utils import get_url, get_kodi_version
 
@@ -35,10 +35,10 @@ def list_channels(label):
                         favourite = True
                     else:
                         favourite = False
+                    print(item['current'])
                     get_show_listitem(label, item['current']['sidp'], favourite, item['current']['assignedToChannel']['channelName'] + ' | ' + item['current']['title'] + ' | ' + title_time, url)
                 else:
                     channelId = item['current']['encoder']
-                    channelName = item['current']['assignedToChannel']['channelName']
                     channelLogo = item['current']['channelSettings']['channelLogo']
                     title = item['current']['title']
                     previewImage = item['current']['previewImage']

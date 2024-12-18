@@ -25,7 +25,9 @@ GRAPHQL = {'LiveBroadcastFind' : '{"persistedQuery":{"version":1,"sha256Hash":"b
            'GetEpisodes' : '{"persistedQuery":{"version":1,"sha256Hash":"069bc67c71d69634e6653ac19166e9f94a7db83ec234f35f90fa63ad45caf69d"}}',
            'TVProgramChannelsList' : '{"persistedQuery":{"version":1,"sha256Hash":"bd7ad903729d72514769cca80174d142d1338bdcf353e70b2be8dd8653ffb918"}}',
            'TvProgramDaily' : '{"persistedQuery":{"version":1,"sha256Hash":"661cff054ced91ce2671f85bd398bee5ea5686a2d3f56f46ef5ce19b1ec632a4"}}',
-           'TvProgramDailyTablet' : '{"persistedQuery":{"version":1,"sha256Hash":"e661b593b712f0b533a989d75413136bf4459dcf0ee13522538145cd74cad1b3"}}'
+           'TvProgramDailyTablet' : '{"persistedQuery":{"version":1,"sha256Hash":"e661b593b712f0b533a989d75413136bf4459dcf0ee13522538145cd74cad1b3"}}',
+           'HomepageBlock' : '{"persistedQuery":{"version":1,"sha256Hash":"2787c318baa800372e53486b85000934ae6603f79b1cdd092966ea881226ceac"}}',
+           'HomepageRows' : '{"persistedQuery":{"version":1,"sha256Hash":"d1dcd6054b78bb4e97f986f031e75ecf37f3074eb61e97f588101de866ce5805"}}',
           }
 
 def call_graphql(operationName, variables):

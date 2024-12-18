@@ -2,6 +2,11 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.1.0 (18.12.2024)<br>
+- přidání doporučených pořadů<br>
+- aktualizace ikon<br>
+- přidání kešovaní detailních dat o pořadech<br><br>
+
 v2.0.9 (15.12.2024)<br>
 - úprava parsování URL od dimov-cz<br>
 - přidání dočasných kanálů do živého vysílání<br><br>
@@ -21,7 +26,4 @@ v2.0.7 (10.12.2024)<br>
 
 v2.0.5/6 (8.12.2024)<br>
 - fix pro Kodi Leia (díky @Roman Štefko)<br><br>
-
-v2.0.4 (8.12.2024)<br>
-- oprava vyhledávání<br><br>
 </p>

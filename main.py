@@ -11,7 +11,9 @@ except ImportError:
     from urllib.parse import parse_qsl # type: ignore
 
 from resources.lib.live import list_channels
+from resources.lib.items import remove_db
 from resources.lib.category import list_categories, list_subcategories, list_category, list_series
+from resources.lib.recommended import list_recommended, list_block
 from resources.lib.stream import play_channel, play_id, play_from_url
 from resources.lib.archive import list_archive, list_archive_days, list_program
 from resources.lib.search import list_search, delete_search, program_search
@@ -49,6 +51,11 @@ def list_menu():
     list_item.setArt({ 'thumb' : os.path.join(icons_dir , 'categories.png'), 'icon' : os.path.join(icons_dir , 'categories.png') })
     xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
 
+    list_item = xbmcgui.ListItem(label = 'Doporučené')
+    url = get_url(action='list_recommended', label = 'Doporučené')  
+    list_item.setArt({ 'thumb' : os.path.join(icons_dir , 'recommended.png'), 'icon' : os.path.join(icons_dir , 'recommended.png') })
+    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+
     list_item = xbmcgui.ListItem(label = 'Oblíbené')
     url = get_url(action='list_favourites', label = 'Oblíbené')  
     list_item.setArt({ 'thumb' : os.path.join(icons_dir , 'favourites.png'), 'icon' : os.path.join(icons_dir , 'favourites.png') })
@@ -79,6 +86,12 @@ def router(paramstring):
         elif params['action'] == 'play_id':
             play_id(params['id'])
 
+        elif params['action'] == 'list_recommended':
+            list_recommended(params['label'])
+        elif params['action'] == 'list_block':
+            list_block(params['label'], params['blockId'])            
+
+
         elif params['action'] == 'list_channels':
             list_channels(params['label'])
         elif params['action'] == 'play_channel':
@@ -106,6 +119,9 @@ def router(paramstring):
             add_favourite(params['item'])
         elif params['action'] == 'remove_favourite':
             remove_favourite(params['item'])            
+
+        elif params['action'] == 'remove_cache':
+            remove_db()
 
         elif params['action'] == 'list_settings':
             list_settings(params['label'])

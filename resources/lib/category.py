@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-import xbmc
 import xbmcgui
 import xbmcplugin
 import xbmcaddon
@@ -9,8 +8,9 @@ import xbmcaddon
 import math
 
 from resources.lib.api import call_graphql
+from resources.lib.items import get_show_listitem
 from resources.lib.favourites import get_favourites
-from resources.lib.utils import get_url, encode, get_kodi_version, plugin_id, encode, ordering
+from resources.lib.utils import get_url, encode, get_kodi_version, encode, ordering
 
 if len(sys.argv) > 1:
     _handle = int(sys.argv[1])
@@ -89,102 +89,6 @@ def list_series(label, id, page):
             xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
 
     xbmcplugin.endOfDirectory(_handle, cacheToDisc = False)              
-
-def get_show_listitem(label, id, favourite = False, title = None, url = None):
-    if url is None:
-        expand_series = True
-    else:
-        expand_series = False
-    kodi_version = get_kodi_version()
-    data = call_graphql(operationName = 'Show', variables = '{"id":"' + str(id) + '"}')
-    if data is not None:
-        menus = []
-        idec = data['idec']
-        if title is not None:
-            list_item = xbmcgui.ListItem(label = title)
-        else:
-            list_item = xbmcgui.ListItem(label = data['title'])
-        if data['showType'] in ['series', 'magazine'] and expand_series == True:
-            url = get_url(action='list_series', label = label + '/' + encode(data['title']), id = idec, page = 1)  
-        else:
-            if url is None:
-                url = get_url(action='play_id', id = idec)  
-            list_item.setProperty('IsPlayable', 'true')       
-            list_item.setContentLookup(False)          
-        if data['showType'] in ['series', 'magazine']:
-            menus.append(('Přejít na pořad...', 'Container.Update(' + get_url(action = 'list_series', label = data['title'], id = str(idec), page = 1) + ')'))
-        if kodi_version >= 20:
-            infotag = list_item.getVideoInfoTag()
-            infotag.setMediaType('movie')
-        else:
-            list_item.setInfo('video', {'mediatype' : 'movie'})     
-        list_item.setArt({'thumb': data['images']['card'], 'poster' : data['images']['card']})
-        if 'shortDescription' in data and data['shortDescription'] is not None:
-            if kodi_version >= 20:
-                infotag.setPlot(data['shortDescription'])
-            else:
-                list_item.setInfo('video', {'plot': data['shortDescription']})  
-        if 'year' in data and data['year'] is not None and len(str(data['year'])) > 0:
-            if kodi_version >= 20:
-                infotag.setYear(int(data['year']))
-            else:
-                list_item.setInfo('video', {'year': int(data['year'])})    
-
-        if 'flatGenres' in data and data['flatGenres'] is not None and len(data['flatGenres']) > 0:
-            genres = []
-            for genre in data['flatGenres']:      
-              genres.append(genre['title'])
-            if kodi_version >= 20:
-                infotag.setGenres(genres)
-            else:
-                list_item.setInfo('video', {'genre' : genres}) 
-        if 'countriesOfOrigin' in data and data['countriesOfOrigin'] is not None and len(data['countriesOfOrigin']) > 0:
-            if kodi_version >= 20:
-                infotag.setCountries([data['countriesOfOrigin'][0]['title']])
-            else:
-                list_item.setInfo('video', {'countriesOfOrigin': data['countriesOfOrigin'][0]['title']})
-
-        if 'creators' in data and data['creators'] is not None and len(data['creators']) > 0:
-            parts = data['creators'].split('.')
-            for part in parts:
-                part = encode(part).strip().replace(' a další','')
-                if ':' in part and 'Režie' in part:
-                    directors = []
-                    if len(part.split(':')) > 0:
-                        directors_data = part.split(':')[1].split(',')
-                        for person in directors_data:
-                            directors.append(person.strip())
-                        if len(directors) > 0:
-                            if kodi_version >= 20:
-                                infotag.setDirectors(directors)
-                            else:
-                                list_item.setInfo('video', {'director' : directors})  
-                if ':' in part and 'Hrají' in part:
-                    cast = []
-                    if len(part.split(':')) > 0:
-                        cast_data = part.split(':')[1].split(',')
-                        for person in cast_data: 
-                            if kodi_version >= 20:
-                                cast.append(xbmc.Actor(person.strip()))
-                            else:
-                                cast.append(person)                    
-                        if len(cast) > 0:
-                            if kodi_version >= 20:
-                                infotag.setCast(cast)
-                            else:
-                                list_item.setInfo('video', {'castandrole' : cast})  
-
-        if favourite == True:
-            menus.append(('Odstranit z oblíbených iVysíláni', 'RunPlugin(plugin://' + plugin_id + '?action=remove_favourite&item=' + str(id) + ')'))
-        else:
-            menus.append(('Přidat do oblíbených iVysíláni', 'RunPlugin(plugin://' + plugin_id + '?action=add_favourite&item=' + str(id) + ')'))
-        if len(menus) > 0:
-            list_item.addContextMenuItems(menus, replaceItems = True)        
-
-        if data['showType'] in ['series', 'magazine'] and expand_series == True:
-            xbmcplugin.addDirectoryItem(_handle, url, list_item, True)              
-        else:
-            xbmcplugin.addDirectoryItem(_handle, url, list_item, False)        
 
 def list_category(label, categoryId, subcategory, page):
     addon = xbmcaddon.Addon()
