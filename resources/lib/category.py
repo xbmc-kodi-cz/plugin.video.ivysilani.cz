@@ -17,7 +17,7 @@ if len(sys.argv) > 1:
 
 def list_categories(label):
     xbmcplugin.setPluginCategory(_handle, label)
-    data = call_graphql(operationName = 'CategoryMenu', variables = '{}')
+    data = call_graphql(operationName = 'Categories', variables = '{"deviceType":"website"}')
     if data is not None:
         for item in data:
             if item['categoryId'] is not None:
@@ -28,7 +28,7 @@ def list_categories(label):
 
 def list_subcategories(label, categoryId):
     xbmcplugin.setPluginCategory(_handle, label)
-    data = call_graphql(operationName = 'CategoryMenu', variables = '{}')
+    data = call_graphql(operationName = 'Categories', variables = '{"deviceType":"website"}')
     if data is not None:
         for item in data:
             if item['categoryId'] is not None and item['categoryId'][0] == str(categoryId):

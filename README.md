@@ -2,6 +2,10 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.1.1 (15.1.2025)<br>
+- změna API pro načítání kategorií<br>
+- navýšení pokusů u chyby PersistedQueryNotFound<br><br>
+
 v2.1.0 (18.12.2024)<br>
 - přidání doporučených pořadů<br>
 - aktualizace ikon<br>
@@ -23,7 +27,4 @@ v2.0.7 (10.12.2024)<br>
 - nastavení typu obsahu<br>
 - opakování volání při chybě PersistedQueryNotFound<br>
 - přidaná podpora titulků (díky Martinovi Peckovi)<br><br>
-
-v2.0.5/6 (8.12.2024)<br>
-- fix pro Kodi Leia (díky @Roman Štefko)<br><br>
 </p>
