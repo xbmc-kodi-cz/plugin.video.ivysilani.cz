@@ -35,7 +35,6 @@ def list_channels(label):
                         favourite = True
                     else:
                         favourite = False
-                    print(item['current'])
                     get_show_listitem(label, item['current']['sidp'], favourite, item['current']['assignedToChannel']['channelName'] + ' | ' + item['current']['title'] + ' | ' + title_time, url)
                 else:
                     channelId = item['current']['encoder']
