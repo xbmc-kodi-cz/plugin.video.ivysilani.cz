@@ -139,7 +139,7 @@ def get_item_data(id, cache = True):
         item_data = get_data_from_api(id, cache)
     return item_data
 
-def get_show_listitem(label, id, favourite = False, title = None, url = None):
+def get_show_listitem(label, id, favourite = False, title = None, url = None, item_data = None):
     if url is None:
         expand_series = True
         cache = True
@@ -147,7 +147,8 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None):
         expand_series = False
         cache = False
     kodi_version = get_kodi_version()
-    item_data = get_item_data(int(id), cache)
+    if item_data is None:
+        item_data = get_item_data(int(id), cache)
     if len(item_data) > 0:
         menus = []
         idec = item_data['idec']

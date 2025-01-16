@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.1.1">
+﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.1.2">
   <requires>
     <import addon="xbmc.python" version="2.24.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>        
@@ -13,6 +13,9 @@ Doplněk pro iVysílání České televize
     </description>    
     <platform>all</platform>
     <news>
+v2.1.2 (16.1.2025)
+- přepracování živého vysílání
+
 v2.1.1 (15.1.2025)
 - změna API pro načítání kategorií
 - navýšení pokusů u chyby PersistedQueryNotFound
@@ -31,13 +34,6 @@ v2.0.8 (12.12.2024)
 - ošetření chyb v datech
 - přidaná možnost externího spuštění streamu se zadáním URL z webu (play_url)
 - v nastavení lze nastavit třídění pořadů v kategoriích
-
-v2.0.7 (10.12.2024)
-- u seriálů je možné v kontextovém menu přejít na seznam epizod pořadu
-- přidaná možnost přes kontextové menu přidat pořad mezi oblíbené (mimo živé vysílání)
-- nastavení typu obsahu
-- opakování volání při chybě PersistedQueryNotFound
-- přidaná podpora titulků (díky Martinovi Peckovi)
     </news>
     <assets>
         <icon>icon.png</icon>
