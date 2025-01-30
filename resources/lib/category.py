@@ -66,7 +66,7 @@ def list_series(label, id, page):
 
         for item in data['items']:
             list_item = xbmcgui.ListItem(label = item['title'])
-            url = get_url(action='play_id', id = item['id'])  
+            url = get_url(action='play_idec', idec = item['id'])  
             list_item.setProperty('IsPlayable', 'true')       
             list_item.setContentLookup(False)          
             if kodi_version >= 20:

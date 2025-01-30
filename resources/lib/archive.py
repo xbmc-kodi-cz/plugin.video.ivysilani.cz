@@ -66,9 +66,10 @@ def list_program(label, channel, day_min):
                     favourite = True
                 else:
                     favourite = False
-                get_show_listitem(label, item['sidp'], favourite, title)
+                item_data = { 'idec' : int(item['idec']), 'showType' : 'show', 'title' : item['title'], 'description' : item['description'], 'image' :item['imageUrl'], 'cast' : [], 'directors' : [], 'year' : '', 'country' : '', 'genres' : []}
+                get_show_listitem(label, item['sidp'], favourite, title, item_data = item_data)
             else:
                 list_item = xbmcgui.ListItem(label = '[COLOR = grey]' + day_translation_short[datetime.fromtimestamp(startTime).strftime('%w')] + ' ' + datetime.fromtimestamp(startTime).strftime('%d.%m %H:%M') + ' - ' + datetime.fromtimestamp(endTime).strftime('%H:%M') + ' | ' + encode(item['title']) + '[/COLOR]')
-                url = get_url(action='play_id', id = 'N/A') 
+                url = get_url(action='play_idec', idec = 'N/A') 
                 xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
     xbmcplugin.endOfDirectory(_handle, updateListing = True, cacheToDisc = True)    
