@@ -11,14 +11,13 @@ try:
 except ImportError:
     from xbmc import translatePath
 
-import base64
-
 try:
     from urllib.request import urlopen # type: ignore
 except ImportError:
     from urllib2 import urlopen # type: ignore
 
 from resources.lib.api import call_api, call_graphql
+from resources.lib.items import get_item_data
 from resources.lib.utils import PY2, iso639map
 
 if len(sys.argv) > 1:
@@ -36,7 +35,14 @@ def play_id(id):
     if id == 'N/A':
         xbmcgui.Dialog().notification('iVysílání', 'Pořad není k dispozici!', xbmcgui.NOTIFICATION_ERROR, 5000)
         return   
-    data = call_api(url = 'https://api.ceskatelevize.cz/video/v1/playlist-vod/v1/stream-data/media/external/' + str(id) + '?canPlayDrm=true&quality=web&streamType=dash&origin=ivysilani&usePlayability=true')
+    item_data = get_item_data(id)
+    play_idec(item_data['idec'])
+
+def play_idec(idec):
+    if idec == 'N/A':
+        xbmcgui.Dialog().notification('iVysílání', 'Pořad není k dispozici!', xbmcgui.NOTIFICATION_ERROR, 5000)
+        return   
+    data = call_api(url = 'https://api.ceskatelevize.cz/video/v1/playlist-vod/v1/stream-data/media/external/' + str(idec) + '?canPlayDrm=true&quality=web&streamType=dash&origin=ivysilani&usePlayability=true')
     if 'streams' not in data or len(data['streams']) < 1 or 'url' not in data['streams'][0]:
         xbmcgui.Dialog().notification('iVysílání', 'Chyba při přehrání pořadu', xbmcgui.NOTIFICATION_ERROR, 5000)
     else:
@@ -58,7 +64,7 @@ def play_from_url(url):
             xbmcgui.Dialog().notification('iVysílání', 'Pořad %s není k dispozici' % str(show_id), xbmcgui.NOTIFICATION_ERROR, 5000)
             return
         idec = data['idec']
-    play_id(idec)
+    play_idec(idec)
 
 def play_url(url, subtitles=[]):
     list_item = xbmcgui.ListItem(path = url)

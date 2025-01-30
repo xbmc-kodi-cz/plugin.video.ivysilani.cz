@@ -23,10 +23,10 @@ GRAPHQL = {
            'LiveBroadcastFind' : '{"persistedQuery":{"version":1,"sha256Hash":"bb3130f883abe674a50e02962ccce18b14bb7194700c73e8bb2a1474d1292082"}}',
            'Categories' : '{"persistedQuery":{"version":1,"sha256Hash":"9c1f01e5eb56c808d38ad46cd0b2e88e4acc235af9a88ea947fe1a04cbfff329"}}',
 #           'CategoryMenu' : '{"persistedQuery":{"version":1,"sha256Hash":"2f75393bd74faae039f60fe26b1248e6819f794e489234573e9c829b4dfa2827"}}',
-           'GetCategoryById' : '{"persistedQuery":{"version":1,"sha256Hash":"793f96231cd326e46a3db0c0f6b07aba3c75fae2351b1476119885b2733b7b64"}}',
+           'GetCategoryById' : '{"persistedQuery":{"version":1,"sha256Hash":"e8f138451a02b5310cc46626961ed75441d50e875aa99eef74cd3ebd76fe1674"}}',
            'Show' : '{"persistedQuery":{"version":1,"sha256Hash":"60d2f49d4f4213fc11b287d58190f33bc1461bbc740cb79a290fd168781ab913"}}',
            'MediumMeta' : '{"persistedQuery":{"version":1,"sha256Hash":"b6ac484229e4ed1a3226eb2bc589c10d5ef2c90ca6bea29508725f59472ed8cb"}}',
-           'SearchShows' : '{"persistedQuery":{"version":1,"sha256Hash":"b5275e0a1c0320064fa11f492469825db0006f94e5f7b1c0fff9e4976c63bf7e"}}',
+           'SearchShows' : '{"persistedQuery":{"version":1,"sha256Hash":"0ed5566c9b2d37d6fc0b3f76a1b6f06e8633dae9de5d90a3dcdb10bbaf0388a9"}}',
            'GetEpisodes' : '{"persistedQuery":{"version":1,"sha256Hash":"069bc67c71d69634e6653ac19166e9f94a7db83ec234f35f90fa63ad45caf69d"}}',
            'TVProgramChannelsList' : '{"persistedQuery":{"version":1,"sha256Hash":"bd7ad903729d72514769cca80174d142d1338bdcf353e70b2be8dd8653ffb918"}}',
            'TvProgramDaily' : '{"persistedQuery":{"version":1,"sha256Hash":"661cff054ced91ce2671f85bd398bee5ea5686a2d3f56f46ef5ce19b1ec632a4"}}',
@@ -43,10 +43,9 @@ def call_graphql(operationName, variables):
         data = call_api(url = url)
         if 'errors' in data and data['errors'] and 'message' in data['errors'][0] and data['errors'][0]['message'] == 'PersistedQueryNotFound':
             err = err + 1
-            time.sleep(0.5)
+            time.sleep(1)
         else:
             ok = True
-    time.sleep(0.5)
     if 'data' not in data or data['data'] is None:
         return None
     for result in data['data']:

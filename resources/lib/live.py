@@ -45,7 +45,7 @@ def list_channels(label):
                         favourite = True
                     else:
                         favourite = False
-                    item_data = { 'idec' : int(item['currentBroadcast']['item']['idec']), 'showType' : 'show', 'title' : item['currentBroadcast']['item']['title'], 'description' : item['currentBroadcast']['item']['description'], 'image' : item['currentBroadcast']['item']['imageUrl'], 'cast' : [], 'directors' : [], 'year' : '', 'country' : '', 'genres' : []}
+                    item_data = { 'id' : item['currentBroadcast']['item']['sidp'], 'idec' : int(item['currentBroadcast']['item']['idec']), 'showType' : 'show', 'title' : item['currentBroadcast']['item']['title'], 'description' : item['currentBroadcast']['item']['description'], 'image' : item['currentBroadcast']['item']['imageUrl'], 'cast' : [], 'directors' : [], 'year' : '', 'country' : '', 'genres' : []}
                     get_show_listitem(label, item['currentBroadcast']['item']['sidp'], favourite, channels[item['channel']]['name'] + ' | ' + item['currentBroadcast']['item']['title'] + ' | ' + title_time, url, item_data)
                 else:
                     channel_data = call_api(url = 'https://api.ceskatelevize.cz/video/v1/playlist-vod/v1/stream-data/media/external/' + str(item['currentBroadcast']['item']['idec']) + '?canPlayDrm=true&quality=web&streamType=dash&origin=ivysilani&usePlayability=true')

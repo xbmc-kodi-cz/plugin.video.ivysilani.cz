@@ -149,6 +149,8 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
     kodi_version = get_kodi_version()
     if item_data is None:
         item_data = get_item_data(int(id), cache)
+    else:
+        expand_series = False
     if len(item_data) > 0:
         menus = []
         idec = item_data['idec']
@@ -160,7 +162,7 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
             url = get_url(action='list_series', label = label + '/' + encode(item_data['title']), id = idec, page = 1)  
         else:
             if url is None:
-                url = get_url(action='play_id', id = idec)  
+                url = get_url(action='play_idec', idec = idec)  
             list_item.setProperty('IsPlayable', 'true')       
             list_item.setContentLookup(False)          
         if item_data['showType'] in ['series', 'magazine']:
@@ -191,7 +193,6 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
                 infotag.setCountries([item_data['country']])
             else:
                 list_item.setInfo('video', {'country': item_data['country']})
-
 
         if len(item_data['directors']) > 0:
             if kodi_version >= 20:
