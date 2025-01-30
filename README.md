@@ -3,7 +3,7 @@
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
 v2.1.3 (30.1.2025)<br>
-- úpravy na zakládě změn API iVysílání<br>
+- úpravy na základě změn API iVysílání<br>
 - úpravy v kategoriích<br><br>
 
 v2.1.2 (16.1.2025)<br>
