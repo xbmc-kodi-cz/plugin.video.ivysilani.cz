@@ -20,7 +20,7 @@ from resources.lib.utils import ua, graphql_url
 
 GRAPHQL = { 
            'CurrentBroadcast' : '{"persistedQuery":{"version":1,"sha256Hash":"389c87717d866889c7a97c3452448c255c68dd1a78e155e15839e782672154c9"}}',
-           'LiveBroadcastFind' : '{"persistedQuery":{"version":1,"sha256Hash":"bb3130f883abe674a50e02962ccce18b14bb7194700c73e8bb2a1474d1292082"}}',
+           'LiveBroadcastFind' : '{"persistedQuery":{"version":1,"sha256Hash":"dbe5f832b7fb5830bda984155f49b4b8c055c1f3f5de8561bfda05ed5658ae61"}}',
            'Categories' : '{"persistedQuery":{"version":1,"sha256Hash":"9c1f01e5eb56c808d38ad46cd0b2e88e4acc235af9a88ea947fe1a04cbfff329"}}',
 #           'CategoryMenu' : '{"persistedQuery":{"version":1,"sha256Hash":"2f75393bd74faae039f60fe26b1248e6819f794e489234573e9c829b4dfa2827"}}',
            'GetCategoryById' : '{"persistedQuery":{"version":1,"sha256Hash":"e8f138451a02b5310cc46626961ed75441d50e875aa99eef74cd3ebd76fe1674"}}',

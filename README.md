@@ -2,6 +2,9 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.1.4 (31.1.2025)<br>
+- úprava živého vysílání<br><br>
+
 v2.1.3 (30.1.2025)<br>
 - úpravy na základě změn API iVysílání<br>
 - úpravy v kategoriích<br><br>
@@ -17,8 +20,4 @@ v2.1.0 (18.12.2024)<br>
 - přidání doporučených pořadů<br>
 - aktualizace ikon<br>
 - přidání kešovaní detailních dat o pořadech<br><br>
-
-v2.0.9 (15.12.2024)<br>
-- úprava parsování URL od dimov-cz<br>
-- přidání dočasných kanálů do živého vysílání<br><br>
 </p>
