@@ -2,6 +2,9 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.1.5 (4.2.2025)<br>
+- změny v API<br><br>
+
 v2.1.4 (31.1.2025)<br>
 - úprava živého vysílání<br><br>
 
@@ -15,9 +18,4 @@ v2.1.2 (16.1.2025)<br>
 v2.1.1 (15.1.2025)<br>
 - změna API pro načítání kategorií<br>
 - navýšení pokusů u chyby PersistedQueryNotFound<br><br>
-
-v2.1.0 (18.12.2024)<br>
-- přidání doporučených pořadů<br>
-- aktualizace ikon<br>
-- přidání kešovaní detailních dat o pořadech<br><br>
 </p>

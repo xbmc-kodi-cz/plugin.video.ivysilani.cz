@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.1.4">
+﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.1.5">
   <requires>
     <import addon="xbmc.python" version="2.24.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>        
@@ -13,6 +13,9 @@ Doplněk pro iVysílání České televize
     </description>    
     <platform>all</platform>
     <news>
+v2.1.5 (4.2.2025)
+- změny v API
+
 v2.1.4 (31.1.2025)
 - úprava živého vysílání
 
@@ -26,11 +29,6 @@ v2.1.2 (16.1.2025)
 v2.1.1 (15.1.2025)
 - změna API pro načítání kategorií
 - navýšení pokusů u chyby PersistedQueryNotFound
-
-v2.1.0 (18.12.2024)
-- přidání doporučených pořadů
-- aktualizace ikon
-- přidání kešovaní detailních dat o pořadech
     </news>
     <assets>
         <icon>icon.png</icon>
