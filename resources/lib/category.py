@@ -56,6 +56,7 @@ def list_series(label, id, page):
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba při načtení epizod', xbmcgui.NOTIFICATION_ERROR, 5000)        
     else:
+        print(data)
         totalCount = int(data['totalCount'])
         if int(offset) > 0:
             list_item = xbmcgui.ListItem(label='Předchozí strana (' + str(int(page) - 1) + '/' + str(math.ceil(totalCount/pagesize)) + ')')
@@ -71,15 +72,25 @@ def list_series(label, id, page):
             list_item.setContentLookup(False)          
             if kodi_version >= 20:
                 infotag = list_item.getVideoInfoTag()
-                infotag.setMediaType('movie')
+                infotag.setMediaType('episode')
             else:
-                list_item.setInfo('video', {'mediatype' : 'movie'})        
+                list_item.setInfo('video', {'mediatype' : 'episode'})        
+            if kodi_version >= 20:
+                infotag.setTitle(item['title'])
+            else:
+                list_item.setInfo('video', {'title' : item['title']})
+            if kodi_version >= 20:
+                infotag.setTvShowTitle(item['showTitle'])
+            else:
+                list_item.setInfo('video', {'tvshowtitle' : item['showTitle']})
             list_item.setArt({'thumb': item['images']['card'], 'poster' : item['images']['card']})
             if 'description' in item and item['description'] is not None:
                 if kodi_version >= 20:
                     infotag.setPlot(item['description'])
                 else:
-                    list_item.setInfo('video', {'plot': item['description']})  
+                    list_item.setInfo('video', {'plot': item['description']})
+
+
             xbmcplugin.addDirectoryItem(_handle, url, list_item, False)        
 
         if  totalCount > int(offset) + pagesize:
