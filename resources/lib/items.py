@@ -168,9 +168,9 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
             menus.append(('Přejít na pořad...', 'Container.Update(' + get_url(action = 'list_series', label = encode(item_data['title']), id = str(idec), page = 1) + ')'))
         if kodi_version >= 20:
             infotag = list_item.getVideoInfoTag()
-            infotag.setMediaType('movie')
+            infotag.setMediaType('tvshow')
         else:
-            list_item.setInfo('video', {'mediatype' : 'movie'})     
+            list_item.setInfo('video', {'mediatype' : 'tvshow'})     
         if kodi_version >= 20:
             infotag.setTitle(title)
         else:

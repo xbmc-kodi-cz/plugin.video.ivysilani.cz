@@ -48,7 +48,7 @@ def list_archive_days(label, channel):
 def list_program(label, channel, day_min):
     label = label.replace('Archiv /','')
     xbmcplugin.setPluginCategory(_handle, label)
-    xbmcplugin.setContent(_handle, 'movies')
+    xbmcplugin.setContent(_handle, 'tvshows')
 
     day = date.today() - timedelta(days = int(day_min))
     data = call_graphql(operationName = 'TvProgramDailyTablet', variables = '{"channels":"' + channel + '","date":"' + day.strftime('%m.%d.%Y') +'"}')
