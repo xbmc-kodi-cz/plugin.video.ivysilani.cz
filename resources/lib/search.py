@@ -41,7 +41,7 @@ def program_search(query, label, page):
     addon = xbmcaddon.Addon()
     icons_dir = os.path.join(addon.getAddonInfo('path'), 'resources','images')
     xbmcplugin.setPluginCategory(_handle, label)
-    xbmcplugin.setContent(_handle, 'movies')
+    xbmcplugin.setContent(_handle, 'tvshows')
     if query == '-----':
         input = xbmc.Keyboard('', 'Hledat')
         input.doModal()

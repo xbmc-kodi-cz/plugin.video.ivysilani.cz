@@ -107,7 +107,7 @@ def list_category(label, categoryId, subcategory, page):
     pagesize = int(addon.getSetting('pagesize'))
     offset = (int(page) - 1) * pagesize
     xbmcplugin.setPluginCategory(_handle, label)
-    xbmcplugin.setContent(_handle, 'movies')
+    xbmcplugin.setContent(_handle, 'tvshows')
     if int(subcategory) == 0:
         list_item = xbmcgui.ListItem(label = 'Podkategorie')
         url = get_url(action='list_subcategories', label = label, categoryId = categoryId)  

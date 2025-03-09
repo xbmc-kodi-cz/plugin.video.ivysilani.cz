@@ -1,3 +1,6 @@
+v2.1.7 (9.3.2025)
+- oprava plnění metadat u pořadů II.
+
 v2.1.6 (9.3.2025)
 - oprava plnění metadat u pořadů
 
@@ -10,6 +13,3 @@ v2.1.4 (31.1.2025)
 v2.1.3 (30.1.2025)
 - úpravy na základě změn API iVysílání
 - úpravy v kategoriích
-
-v2.1.2 (16.1.2025)
-- přepracování živého vysílání

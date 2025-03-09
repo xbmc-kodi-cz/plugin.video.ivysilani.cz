@@ -23,7 +23,7 @@ def list_recommended(label):
 
 def list_block(label, blockId):
     xbmcplugin.setPluginCategory(_handle, label)
-    xbmcplugin.setContent(_handle, 'movies')
+    xbmcplugin.setContent(_handle, 'tvshows')
     data = call_graphql(operationName = 'HomepageBlock', variables = '{"id":"' + str(blockId) + '","limit":40,"offset":0,"deviceType":"website"}')
     if data is not None and 'assets' in data and 'items' in data['assets'] and len(data['assets']['items']) > 0:
         favourites = get_favourites()

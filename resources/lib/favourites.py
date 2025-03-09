@@ -72,7 +72,7 @@ def get_favourites():
 def list_favourites(label):
     from resources.lib.items import get_show_listitem
     xbmcplugin.setPluginCategory(_handle, label)
-    xbmcplugin.setContent(_handle, 'movies')
+    xbmcplugin.setContent(_handle, 'tvshows')
     favourites = get_favourites()
     for id in favourites:
         get_show_listitem(label, id, True)
