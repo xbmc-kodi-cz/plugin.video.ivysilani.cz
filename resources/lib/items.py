@@ -154,10 +154,9 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
     if len(item_data) > 0:
         menus = []
         idec = item_data['idec']
-        if title is not None:
-            list_item = xbmcgui.ListItem(label = title)
-        else:
-            list_item = xbmcgui.ListItem(label = item_data['title'])
+        if title is None:
+            title = item_data['title']
+        list_item = xbmcgui.ListItem(label = title)
         if item_data['showType'] in ['series', 'magazine'] and expand_series == True:
             url = get_url(action='list_series', label = label + '/' + encode(item_data['title']), id = idec, page = 1)  
         else:
@@ -172,6 +171,10 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
             infotag.setMediaType('movie')
         else:
             list_item.setInfo('video', {'mediatype' : 'movie'})     
+        if kodi_version >= 20:
+            infotag.setTitle(title)
+        else:
+            list_item.setInfo('video', {'title' : title})
         list_item.setArt({'thumb': item_data['image'], 'poster' : item_data['image']})
         if kodi_version >= 20:
             infotag.setPlot(item_data['description'])
@@ -182,7 +185,6 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
                 infotag.setYear(int(item_data['year']))
             else:
                 list_item.setInfo('video', {'year': int(item_data['year'])})    
-
         if len(item_data['genres']) > 0:
             if kodi_version >= 20:
                 infotag.setGenres(item_data['genres'])
