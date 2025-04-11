@@ -2,6 +2,7 @@
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>
+    <import addon="script.module.requests" version="2.18.4"/>    
     <import addon="inputstream.adaptive"/>
   </requires>
   <extension library="main.py" point="xbmc.python.pluginsource">
@@ -14,6 +15,10 @@ Doplněk pro iVysílání České televize
     </description>    
     <platform>all</platform>
     <news>
+v2.2.0 (11.4.2025)
+- přepsání volání API
+- odstranění persistent query
+
 v2.1.8 (17.3.2025)
 - přidání závislosti ISA
 
@@ -25,9 +30,6 @@ v2.1.6 (9.3.2025)
 
 v2.1.5 (4.2.2025)
 - změny v API
-
-v2.1.4 (31.1.2025)
-- úprava živého vysílání
     </news>
     <assets>
         <icon>icon.png</icon>
