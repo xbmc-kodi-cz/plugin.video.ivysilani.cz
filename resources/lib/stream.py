@@ -59,7 +59,7 @@ def play_from_url(url):
         return
     idec = m.group("episode_idec") if m else None #series has idec in url
     if not idec: #movies must be resolved by calling graphql
-        data = call_graphql(operationName = 'Show', variables = '{"id":"' + str(show_id) + '"}')
+        data = call_graphql(operationName = 'Show', variables = {'id' : str(show_id)})
         if not data or 'idec' not in data:
             xbmcgui.Dialog().notification('iVysílání', 'Pořad %s není k dispozici' % str(show_id), xbmcgui.NOTIFICATION_ERROR, 5000)
             return

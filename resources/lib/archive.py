@@ -16,7 +16,7 @@ if len(sys.argv) > 1:
 
 def list_archive(label):
     xbmcplugin.setPluginCategory(_handle, label)
-    data = call_graphql(operationName = 'TVProgramChannelsList', variables = '{}')
+    data = call_graphql(operationName = 'TVProgramChannelsList', variables = {})
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba načtení kanálů', xbmcgui.NOTIFICATION_ERROR, 5000)
     else:
@@ -51,7 +51,7 @@ def list_program(label, channel, day_min):
     xbmcplugin.setContent(_handle, 'tvshows')
 
     day = date.today() - timedelta(days = int(day_min))
-    data = call_graphql(operationName = 'TvProgramDailyTablet', variables = '{"channels":"' + channel + '","date":"' + day.strftime('%m.%d.%Y') +'"}')
+    data = call_graphql(operationName = 'TvProgramDailyTablet', variables = {'channels' : channel, 'date' : day.strftime('%m.%d.%Y')})
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba při načtení pořadů', xbmcgui.NOTIFICATION_ERROR, 5000)        
     else:

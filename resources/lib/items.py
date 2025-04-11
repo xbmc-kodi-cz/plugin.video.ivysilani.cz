@@ -63,7 +63,7 @@ def remove_db():
 def get_data_from_api(id, cache):
     global db
     item_data = {}
-    data = call_graphql(operationName = 'Show', variables = '{"id":"' + str(id) + '"}')
+    data = call_graphql(operationName = 'Show', variables = {'id' : str(id)})
     if data is not None:
         idec = int(data['idec'])
         showType = data['showType']

@@ -17,7 +17,7 @@ if len(sys.argv) > 1:
 
 def list_categories(label):
     xbmcplugin.setPluginCategory(_handle, label)
-    data = call_graphql(operationName = 'Categories', variables = '{"deviceType":"website"}')
+    data = call_graphql(operationName = 'Categories', variables = {'deviceType' : 'website'})
     if data is not None:
         for item in data:
             if item['categoryId'] is not None:
@@ -28,7 +28,7 @@ def list_categories(label):
 
 def list_subcategories(label, categoryId):
     xbmcplugin.setPluginCategory(_handle, label)
-    data = call_graphql(operationName = 'Categories', variables = '{"deviceType":"website"}')
+    data = call_graphql(operationName = 'Categories', variables = {'deviceType' : 'website'})
     if data is not None:
         for item in data:
             if item['categoryId'] is not None and item['categoryId'][0] == str(categoryId):
@@ -52,11 +52,10 @@ def list_series(label, id, page):
     pagesize = int(addon.getSetting('pagesize'))
     offset = (int(page) - 1) * pagesize
 
-    data = call_graphql(operationName = 'GetEpisodes', variables = '{"limit":' + str(pagesize) + ',"offset":' + str(offset) + ',"idec":"' + str(id) + '","orderBy":"newest","onlyPlayable":true}')
+    data = call_graphql(operationName = 'GetEpisodes', variables = {'limit' : pagesize, 'offset' : offset, 'idec' : str(id), 'orderBy' : 'newest', 'onlyPlayable' : True})
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba při načtení epizod', xbmcgui.NOTIFICATION_ERROR, 5000)        
     else:
-        print(data)
         totalCount = int(data['totalCount'])
         if int(offset) > 0:
             list_item = xbmcgui.ListItem(label='Předchozí strana (' + str(int(page) - 1) + '/' + str(math.ceil(totalCount/pagesize)) + ')')
@@ -89,8 +88,6 @@ def list_series(label, id, page):
                     infotag.setPlot(item['description'])
                 else:
                     list_item.setInfo('video', {'plot': item['description']})
-
-
             xbmcplugin.addDirectoryItem(_handle, url, list_item, False)        
 
         if  totalCount > int(offset) + pagesize:
@@ -113,8 +110,9 @@ def list_category(label, categoryId, subcategory, page):
         url = get_url(action='list_subcategories', label = label, categoryId = categoryId)  
         list_item.setArt({ 'thumb' : os.path.join(icons_dir , 'categories.png'), 'icon' : os.path.join(icons_dir , 'categories.png') })
         xbmcplugin.addDirectoryItem(_handle, url, list_item, True)    
-
-    data = call_graphql(operationName = 'GetCategoryById', variables = '{"categoryId":"' + categoryId + '","limit":' + str(pagesize) + ',"offset":' + str(offset) + ',' + ordering[addon.getSetting('categories_order')] + '}')
+    var1 = {'categoryId' : categoryId, 'limit' : pagesize, 'offset' : offset}
+    var2 = ordering[addon.getSetting('categories_order')]
+    data = call_graphql(operationName = 'GetCategoryById', variables = {**var1, **var2})
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba při načtení kategorie', xbmcgui.NOTIFICATION_ERROR, 5000)        
     else:

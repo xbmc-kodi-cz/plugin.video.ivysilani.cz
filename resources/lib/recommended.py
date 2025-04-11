@@ -12,7 +12,7 @@ if len(sys.argv) > 1:
 
 def list_recommended(label):
     xbmcplugin.setPluginCategory(_handle, label)
-    data = call_graphql(operationName = 'HomepageRows', variables = '{"deviceType":"website","limit":40,"offset":0}')
+    data = call_graphql(operationName = 'HomepageRows', variables = {'deviceType' : 'website', 'limit': 40, 'offset': 0})
     if data is not None and 'rows' in data and len(data['rows']) > 0:
         for item in data['rows']:
             if item['assets']['totalCount'] > 0:
@@ -24,7 +24,7 @@ def list_recommended(label):
 def list_block(label, blockId):
     xbmcplugin.setPluginCategory(_handle, label)
     xbmcplugin.setContent(_handle, 'tvshows')
-    data = call_graphql(operationName = 'HomepageBlock', variables = '{"id":"' + str(blockId) + '","limit":40,"offset":0,"deviceType":"website"}')
+    data = call_graphql(operationName = 'HomepageBlock', variables = {'id': blockId, 'limit' : 40, 'offset' : 0, 'deviceType' : 'website'})
     if data is not None and 'assets' in data and 'items' in data['assets'] and len(data['assets']['items']) > 0:
         favourites = get_favourites()
         for item in data['assets']['items']:
