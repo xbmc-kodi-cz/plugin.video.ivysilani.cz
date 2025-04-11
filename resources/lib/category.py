@@ -112,7 +112,9 @@ def list_category(label, categoryId, subcategory, page):
         xbmcplugin.addDirectoryItem(_handle, url, list_item, True)    
     var1 = {'categoryId' : categoryId, 'limit' : pagesize, 'offset' : offset}
     var2 = ordering[addon.getSetting('categories_order')]
-    data = call_graphql(operationName = 'GetCategoryById', variables = {**var1, **var2})
+    variables = var1.copy()
+    variables.update(var2)
+    data = call_graphql(operationName = 'GetCategoryById', variables = variables)
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba při načtení kategorie', xbmcgui.NOTIFICATION_ERROR, 5000)        
     else:
