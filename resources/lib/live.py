@@ -48,27 +48,28 @@ def list_channels(label):
                     get_show_listitem(label, item['currentBroadcast']['item']['sidp'], favourite, channels[item['channel']]['name'] + ' | ' + item['currentBroadcast']['item']['title'] + ' | ' + title_time, url, item_data)
                 else:
                     channel_data = call_api(url = 'https://api.ceskatelevize.cz/video/v1/playlist-vod/v1/stream-data/media/external/' + str(item['currentBroadcast']['item']['idec']) + '?canPlayDrm=true&quality=web&streamType=dash&origin=ivysilani&usePlayability=true')
-                    channelId = channel_data['platformChannel']
-                    title = item['currentBroadcast']['item']['title']
-                    image = item['currentBroadcast']['item']['imageUrl']                    
-                    list_item = xbmcgui.ListItem(label = channels[item['channel']]['name'] + ' | ' + title + ' | ' + title_time)
-                    url = get_url(action='play_channel', channelId = channelId)  
-                    if kodi_version >= 20:
-                        infotag = list_item.getVideoInfoTag()
-                        infotag.setMediaType('tvhow')
-                    else:
-                        list_item.setInfo('video', {'mediatype' : 'tvhow'})        
-                    if kodi_version >= 20:
-                        infotag.setTitle(title)
-                    else:
-                        list_item.setInfo('video', {'title' : title})
-                    list_item.setArt({'thumb' : image, 'icon' : image})
-                    list_item.setProperty('IsPlayable', 'true')       
-                    list_item.setContentLookup(False)          
-                    if 'description' in item['currentBroadcast']['item'] and item['currentBroadcast']['item']['description'] is not None:
+                    if 'platformChannel' in channel_data:
+                        channelId = channel_data['platformChannel']
+                        title = item['currentBroadcast']['item']['title']
+                        image = item['currentBroadcast']['item']['imageUrl']                    
+                        list_item = xbmcgui.ListItem(label = channels[item['channel']]['name'] + ' | ' + title + ' | ' + title_time)
+                        url = get_url(action='play_channel', channelId = channelId)  
                         if kodi_version >= 20:
-                            infotag.setPlot(item['currentBroadcast']['item']['description'])
+                            infotag = list_item.getVideoInfoTag()
+                            infotag.setMediaType('tvhow')
                         else:
-                            list_item.setInfo('video', {'plot': item['currentBroadcast']['item']['description']})  
-                    xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
+                            list_item.setInfo('video', {'mediatype' : 'tvhow'})        
+                        if kodi_version >= 20:
+                            infotag.setTitle(title)
+                        else:
+                            list_item.setInfo('video', {'title' : title})
+                        list_item.setArt({'thumb' : image, 'icon' : image})
+                        list_item.setProperty('IsPlayable', 'true')       
+                        list_item.setContentLookup(False)          
+                        if 'description' in item['currentBroadcast']['item'] and item['currentBroadcast']['item']['description'] is not None:
+                            if kodi_version >= 20:
+                                infotag.setPlot(item['currentBroadcast']['item']['description'])
+                            else:
+                                list_item.setInfo('video', {'plot': item['currentBroadcast']['item']['description']})  
+                        xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
         xbmcplugin.endOfDirectory(_handle, cacheToDisc = False)  
