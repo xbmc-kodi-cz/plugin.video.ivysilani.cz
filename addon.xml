@@ -1,6 +1,6 @@
 ﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.2.3">
   <requires>
-    <mport addon="ixbmc.python" version="3.0.0"/>
+    <import addon="xbmc.python" version="3.0.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>
     <import addon="script.module.requests" version="2.18.4"/>    
     <import addon="inputstream.adaptive"/>
