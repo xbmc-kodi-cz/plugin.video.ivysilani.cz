@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.2.2">
+﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.2.3">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>
@@ -15,6 +15,9 @@ Doplněk pro iVysílání České televize
     </description>    
     <platform>all</platform>
     <news>
+v2.2.3 (11.5.2025)
+- změna API pro živé vysílání (řeší chybějící vysílání ČT4 Sport Plus)
+
 v2.2.2 (11.4.2025)
 - ošetření budoucího pořadu v živé TV
 
@@ -27,9 +30,6 @@ v2.2.0 (11.4.2025)
 
 v2.1.8 (17.3.2025)
 - přidání závislosti ISA
-
-v2.1.7 (9.3.2025)
-- oprava plnění metadat u pořadů II.
     </news>
     <assets>
         <icon>icon.png</icon>
