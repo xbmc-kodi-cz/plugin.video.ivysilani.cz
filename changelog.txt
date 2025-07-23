@@ -1,3 +1,6 @@
+v2.2.4 (23.7.2025)
+- změna API iVysílání
+
 v2.2.3 (11.5.2025)
 - změna API pro živé vysílání (řeší chybějící vysílání ČT4 Sport Plus)
 
@@ -10,6 +13,3 @@ v2.2.1 (11.4.2025)
 v2.2.0 (11.4.2025)
 - přepsání volání API
 - odstranění persistent query
-
-v2.1.8 (17.3.2025)
-- přidání závislosti ISA
