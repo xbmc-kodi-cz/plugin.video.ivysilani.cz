@@ -52,7 +52,11 @@ def list_series(label, id, page):
     pagesize = int(addon.getSetting('pagesize'))
     offset = (int(page) - 1) * pagesize
 
-    data = call_graphql(operationName = 'GetEpisodes', variables = {'limit' : pagesize, 'offset' : offset, 'idec' : str(id), 'orderBy' : 'newest', 'onlyPlayable' : True})
+    if addon.getSetting('episodes_order') == 'od nejnovějších':
+        order = 'newest'
+    else:
+        order = 'oldest'
+    data = call_graphql(operationName = 'GetEpisodes', variables = {'limit' : pagesize, 'offset' : offset, 'idec' : str(id), 'orderBy' : order, 'onlyPlayable' : True})
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba při načtení epizod', xbmcgui.NOTIFICATION_ERROR, 5000)        
     else:

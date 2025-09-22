@@ -2,6 +2,9 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.2.5 (22.9.2025)<br>
+- do nastavení přidané řazení epizod<br><br>
+
 v2.2.4 (23.7.2025)<br>
 - změna API iVysílání<br><br>
 
@@ -13,8 +16,4 @@ v2.2.2 (11.4.2025)<br>
 
 v2.2.1 (11.4.2025)<br>
 - oprava kompatibility s Kodi 18<br><br>
-
-v2.2.0 (11.4.2025)<br>
-- přepsání volání API<br>
-- odstranění persistent query<br><br>
 </p>
