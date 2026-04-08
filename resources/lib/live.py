@@ -79,7 +79,6 @@ def list_channels(label):
     xbmcplugin.setContent(_handle, 'tvshows')
     kodi_version = get_kodi_version()
     data = call_graphql_pq(operationName = 'LiveBroadcastFind', variables = '{}')
-    print(data)
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba načtení kanálů', xbmcgui.NOTIFICATION_ERROR, 5000)
     else:
