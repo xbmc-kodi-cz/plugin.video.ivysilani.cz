@@ -28,7 +28,7 @@ def list_block(label, blockId):
     if data is not None and 'assets' in data and 'items' in data['assets'] and len(data['assets']['items']) > 0:
         favourites = get_favourites()
         for item in data['assets']['items']:
-            if int(item['id']) in favourites:
+            if item['id'] in favourites:
                 favourite = True
             else:
                 favourite = False

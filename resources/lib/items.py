@@ -148,7 +148,7 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
         cache = False
     kodi_version = get_kodi_version()
     if item_data is None:
-        item_data = get_item_data(int(id), cache)
+        item_data = get_item_data(id, cache)
     else:
         expand_series = False
     if len(item_data) > 0:
