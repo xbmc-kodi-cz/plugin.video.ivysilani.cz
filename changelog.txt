@@ -1,3 +1,6 @@
+v2.2.7 (9.4.2026)
+- oprava zobrazení položek v Doporučené
+
 v2.2.6 (8.4.2026)
 - ošetření vyjímky
 
@@ -9,6 +12,3 @@ v2.2.4 (23.7.2025)
 
 v2.2.3 (11.5.2025)
 - změna API pro živé vysílání (řeší chybějící vysílání ČT4 Sport Plus)
-
-v2.2.2 (11.4.2025)
-- ošetření budoucího pořadu v živé TV

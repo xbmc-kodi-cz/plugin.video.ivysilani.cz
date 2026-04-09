@@ -28,10 +28,14 @@ def list_block(label, blockId):
     if data is not None and 'assets' in data and 'items' in data['assets'] and len(data['assets']['items']) > 0:
         favourites = get_favourites()
         for item in data['assets']['items']:
-            if item['id'] in favourites:
+            if 'sidp' in item:
+                id = item['sidp']
+            else:
+                id = item['id']
+            if int(id) in favourites:
                 favourite = True
             else:
                 favourite = False
-            get_show_listitem(label, item['id'], favourite)
+            get_show_listitem(label, id, favourite)
         xbmcplugin.endOfDirectory(_handle, cacheToDisc = True)  
 
