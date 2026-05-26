@@ -69,7 +69,11 @@ def list_series(label, id, page):
             xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
 
         for item in data['items']:
-            list_item = xbmcgui.ListItem(label = item['title'])
+            if 'season' in item and 'title' in item['season']:
+                season = '\n[COLOR=gray]' + item['season']['title'] + '[/COLOR]'
+            else:
+                season = ''
+            list_item = xbmcgui.ListItem(label = item['title'] + season)
             url = get_url(action='play_idec', idec = item['id'])  
             list_item.setProperty('IsPlayable', 'true')       
             list_item.setContentLookup(False)          
@@ -79,9 +83,9 @@ def list_series(label, id, page):
             else:
                 list_item.setInfo('video', {'mediatype' : 'episode'})        
             if kodi_version >= 20:
-                infotag.setTitle(item['title'])
+                infotag.setTitle(item['title'] + season)
             else:
-                list_item.setInfo('video', {'title' : item['title']})
+                list_item.setInfo('video', {'title' : item['title'] + season})
             if kodi_version >= 20:
                 infotag.setTvShowTitle(item['showTitle'])
             else:
