@@ -69,7 +69,7 @@ def list_series(label, id, page):
             xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
 
         for item in data['items']:
-            if 'season' in item and 'title' in item['season']:
+            if 'season' in item and item['season'] is not None and 'title' in item['season']:
                 season = '\n[COLOR=gray]' + item['season']['title'] + '[/COLOR]'
             else:
                 season = ''
