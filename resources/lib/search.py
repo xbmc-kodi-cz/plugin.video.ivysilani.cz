@@ -56,7 +56,7 @@ def program_search(query, label, page):
             
     pagesize = int(addon.getSetting('pagesize'))
     offset = (int(page) - 1) * pagesize
-    data = call_graphql(operationName = 'SearchShows', variables = {'limit' : pagesize, 'offset' : offset, 'keyword' : quote(query), 'onlyPlayable' : True})            
+    data = call_graphql(operationName = 'SearchShows', variables = {'limit' : pagesize, 'offset' : offset, 'keyword' : query, 'onlyPlayable' : True})            
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba načtení pořadů', xbmcgui.NOTIFICATION_ERROR, 5000)
     else:
