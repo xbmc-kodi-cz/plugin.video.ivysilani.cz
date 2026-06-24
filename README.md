@@ -2,6 +2,9 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.3.1 (24.6.2026)<br>
+- změna API<br><br>
+
 v2.3.0 (31.5.2026)<br>
 - oprava vyhledávání s diakritikou<br><br>
 
@@ -13,7 +16,4 @@ v2.2.8 (26.5.2026)<br>
 
 v2.2.7 (9.4.2026)<br>
 - oprava zobrazení položek v Doporučené<br><br>
-
-v2.2.6 (8.4.2026)<br>
-- ošetření vyjímky<br><br>
 </p>

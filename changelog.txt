@@ -1,3 +1,6 @@
+v2.3.1 (24.6.2026)
+- změna API
+
 v2.3.0 (31.5.2026)
 - oprava vyhledávání s diakritikou
 
@@ -9,6 +12,3 @@ v2.2.8 (26.5.2026)
 
 v2.2.7 (9.4.2026)
 - oprava zobrazení položek v Doporučené
-
-v2.2.6 (8.4.2026)
-- ošetření vyjímky
