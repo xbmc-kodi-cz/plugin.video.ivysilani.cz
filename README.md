@@ -2,6 +2,9 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.3.2 (24.6.2026)<br>
+- odstranění persistent query (díky Skyjet)<br><br>
+
 v2.3.1 (24.6.2026)<br>
 - změna API<br><br>
 
@@ -13,7 +16,4 @@ v2.2.9 (29.5.2026)<br>
 
 v2.2.8 (26.5.2026)<br>
 - zobrazení řady/série, pokud je dostupná<br><br>
-
-v2.2.7 (9.4.2026)<br>
-- oprava zobrazení položek v Doporučené<br><br>
 </p>
