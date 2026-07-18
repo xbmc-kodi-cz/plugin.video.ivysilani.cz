@@ -2,6 +2,9 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.3.3 (18.7.2026)<br>
+- oprava chyby v Kodi Leia<br><br>
+
 v2.3.2 (24.6.2026)<br>
 - odstranění persistent query (díky Skyjet)<br><br>
 
@@ -13,7 +16,4 @@ v2.3.0 (31.5.2026)<br>
 
 v2.2.9 (29.5.2026)<br>
 - oprava chyby u sérií bez sezóny<br><br>
-
-v2.2.8 (26.5.2026)<br>
-- zobrazení řady/série, pokud je dostupná<br><br>
 </p>

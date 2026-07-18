@@ -1,3 +1,6 @@
+v2.3.3 (18.7.2026)
+- oprava chyby v Kodi Leia
+
 v2.3.2 (24.6.2026)
 - odstranění persistent query (díky Skyjet)
 
@@ -9,6 +12,3 @@ v2.3.0 (31.5.2026)
 
 v2.2.9 (29.5.2026)
 - oprava chyby u sérií bez sezóny
-
-v2.2.8 (26.5.2026)
-- zobrazení řady/série, pokud je dostupná

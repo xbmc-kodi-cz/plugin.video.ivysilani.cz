@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.3.2">
+﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.3.3">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>
@@ -15,6 +15,9 @@ Doplněk pro iVysílání České televize
     </description>    
     <platform>all</platform>
     <news>
+v2.3.3 (18.7.2026)
+- oprava chyby v Kodi Leia
+
 v2.3.2 (24.6.2026)
 - odstranění persistent query (díky Skyjet)
 
@@ -26,9 +29,6 @@ v2.3.0 (31.5.2026)
 
 v2.2.9 (29.5.2026)
 - oprava chyby u sérií bez sezóny
-
-v2.2.8 (26.5.2026)
-- zobrazení řady/série, pokud je dostupná
 </news>
     <assets>
         <icon>icon.png</icon>
