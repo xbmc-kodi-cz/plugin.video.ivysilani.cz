@@ -1,3 +1,6 @@
+v2.3.4 (18.7.2026)
+- oprava závislosti
+
 v2.3.3 (18.7.2026)
 - oprava chyby v Kodi Leia
 
@@ -9,6 +12,3 @@ v2.3.1 (24.6.2026)
 
 v2.3.0 (31.5.2026)
 - oprava vyhledávání s diakritikou
-
-v2.2.9 (29.5.2026)
-- oprava chyby u sérií bez sezóny
