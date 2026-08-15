@@ -109,9 +109,6 @@ def get_data_from_api(id, cache):
             db.execute('INSERT INTO items VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (id, idec, showType, title, description, image, json.dumps(cast), json.dumps(directors), year, country, json.dumps(genres)))      
             db.commit()
         item_data = { 'id' : id, 'idec' : idec, 'showType' : showType, 'title' : title, 'description' : description, 'image' : image, 'cast' : cast, 'directors' : directors, 'year' : year, 'country' : country, 'genres' : genres }
-        print('iVysilani - get_data_from_api > item_data')   
-        print(item_data)
-
     return item_data        
 
 def get_item_data(id, cache = True):
@@ -137,13 +134,9 @@ def get_item_data(id, cache = True):
         else:
             item_data = { 'id' : id, 'idec' : idec, 'showType' : showType, 'title' : title, 'description' : description, 'image' : image, 'cast' : cast, 'directors' : directors, 'year' : year, 'country' : country, 'genres' : genres }                
         close_db()         
-        print('iVysilani - get_item_data (cache)> item_data')   
-        print(item_data)
     else:
         cache = False
         item_data = get_data_from_api(id, cache)
-        print('iVysilani - get_item_data (w/o cache)> item_data')   
-        print(item_data)
     return item_data
 
 def get_show_listitem(label, id, favourite = False, title = None, url = None, item_data = None):
@@ -158,8 +151,6 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
         item_data = get_item_data(int(id), cache)
     else:
         expand_series = False
-    print('iVysilani - get_show_listitem > item_data')
-    print(item_data)
 
     if len(item_data) > 0:
         menus = []
@@ -232,8 +223,6 @@ def get_show_listitem(label, id, favourite = False, title = None, url = None, it
             list_item.addContextMenuItems(menus, replaceItems = True)        
 
         if item_data['showType'] in ['series', 'magazine'] and expand_series == True:
-            print('iVysilani - get_show_listitem > add item (serie)')
             xbmcplugin.addDirectoryItem(_handle, url, list_item, True)              
         else:
-            print('iVysilani - get_show_listitem > add item (playable)')
             xbmcplugin.addDirectoryItem(_handle, url, list_item, False)        

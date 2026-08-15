@@ -16,12 +16,14 @@ if len(sys.argv) > 1:
 
 def list_archive(label):
     xbmcplugin.setPluginCategory(_handle, label)
+    channels = []
     data = call_graphql(operationName = 'TVProgramChannelsList', variables = {})
     if data is None:
         xbmcgui.Dialog().notification('iVysíláni', 'Chyba načtení kanálů', xbmcgui.NOTIFICATION_ERROR, 5000)
     else:
         for item in data:
-            if item['channelAsString'] not in ['ctSportExtra', 'iVysilani']:
+            if item['channelAsString'] not in channels:
+                channels.append(item['channelAsString'])
                 list_item = xbmcgui.ListItem(label = item['channelSettings']['channelName'])
                 url = get_url(action='list_archive_days', channel = item['channelAsString'], label = label + ' / ' + encode(item['channelSettings']['channelName']))  
                 xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
@@ -49,7 +51,7 @@ def list_program(label, channel, day_min):
     label = label.replace('Archiv /','')
     xbmcplugin.setPluginCategory(_handle, label)
     xbmcplugin.setContent(_handle, 'tvshows')
-
+    items = {}
     day = date.today() - timedelta(days = int(day_min))
     data = call_graphql(operationName = 'TvProgramDailyTablet', variables = {'channels' : channel, 'date' : day.strftime('%m.%d.%Y')})
     if data is None:
@@ -57,19 +59,29 @@ def list_program(label, channel, day_min):
     else:
         favourites = get_favourites()
         tz_offset = int(time.mktime(datetime.now().timetuple())-time.mktime(datetime.utcnow().timetuple()))
-        for item in data[0]['program']:
-            startTime = time.mktime(time.strptime(item['start'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset
-            endTime = time.mktime(time.strptime(item['end'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset
-            if 'idec' in item and item['idec'] is not None and 'isPlayableNow' in item and item['isPlayableNow'] == True:
-                title = day_translation_short[(datetime.fromtimestamp(startTime)).strftime('%w')] + ' ' + datetime.fromtimestamp(startTime).strftime('%d.%m %H:%M') + ' - ' + datetime.fromtimestamp(endTime).strftime('%H:%M') + ' | ' + encode(item['title'])
-                if int(item['sidp']) in favourites:
-                    favourite = True
+        for channel_program in data:
+            for item in channel_program['program']:
+                print(item)
+                startTime = time.mktime(time.strptime(item['start'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset
+                endTime = time.mktime(time.strptime(item['end'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset
+                if 'playableFrom' in item and len(str(item['playableFrom'])) > 0 and time.mktime(time.strptime(item['start'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset > time.time():
+                    item['isPlayableNow'] = False
+                if 'idec' in item and item['idec'] is not None and 'isPlayableNow' in item and item['isPlayableNow'] == True and ('liveOnly' not in item or item['liveOnly'] == False):
+                    title = day_translation_short[(datetime.fromtimestamp(startTime)).strftime('%w')] + ' ' + datetime.fromtimestamp(startTime).strftime('%d.%m %H:%M') + ' - ' + datetime.fromtimestamp(endTime).strftime('%H:%M') + ' | ' + encode(item['title'])
+                    if int(item['sidp']) in favourites:
+                        favourite = True
+                    else:
+                        favourite = False
+                    item_data = { 'idec' : int(item['idec']), 'showType' : 'show', 'title' : item['title'], 'description' : item['description'], 'image' :item['imageUrl'], 'cast' : [], 'directors' : [], 'year' : '', 'country' : '', 'genres' : []}
+                    items.update({item['start'] + channel_program['encoder'] : {'sidp' : item['sidp'], 'favourite' : favourite, 'title' : title, 'item_data' : item_data}})
                 else:
-                    favourite = False
-                item_data = { 'idec' : int(item['idec']), 'showType' : 'show', 'title' : item['title'], 'description' : item['description'], 'image' :item['imageUrl'], 'cast' : [], 'directors' : [], 'year' : '', 'country' : '', 'genres' : []}
-                get_show_listitem(label, item['sidp'], favourite, title, item_data = item_data)
+                    items.update({item['start'] + channel_program['encoder'] : {'label' : '[COLOR = grey]' + day_translation_short[datetime.fromtimestamp(startTime).strftime('%w')] + ' ' + datetime.fromtimestamp(startTime).strftime('%d.%m %H:%M') + ' - ' + datetime.fromtimestamp(endTime).strftime('%H:%M') + ' | ' + encode(item['title']) + '[/COLOR]'}})
+        for item in sorted(items):
+            data = items[item]
+            if 'sidp' in data:
+                get_show_listitem(label, data['sidp'], data['favourite'], data['title'], item_data = data['item_data'])
             else:
-                list_item = xbmcgui.ListItem(label = '[COLOR = grey]' + day_translation_short[datetime.fromtimestamp(startTime).strftime('%w')] + ' ' + datetime.fromtimestamp(startTime).strftime('%d.%m %H:%M') + ' - ' + datetime.fromtimestamp(endTime).strftime('%H:%M') + ' | ' + encode(item['title']) + '[/COLOR]')
+                list_item = xbmcgui.ListItem(label = data['label'])
                 url = get_url(action='play_idec', idec = 'N/A') 
                 xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
     xbmcplugin.endOfDirectory(_handle, updateListing = True, cacheToDisc = True)    

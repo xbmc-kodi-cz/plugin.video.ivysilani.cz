@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.3.4">
+﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.3.5">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>
@@ -15,6 +15,9 @@ Doplněk pro iVysílání České televize
     </description>    
     <platform>all</platform>
     <news>
+v2.3.5 (15.8.2026)
+- přidání archivu ČT4 Sport Plus
+
 v2.3.4 (18.7.2026)
 - oprava závislosti 
 
@@ -26,9 +29,6 @@ v2.3.2 (24.6.2026)
 
 v2.3.1 (24.6.2026)
 - změna API
-
-v2.3.0 (31.5.2026)
-- oprava vyhledávání s diakritikou
 </news>
     <assets>
         <icon>icon.png</icon>
