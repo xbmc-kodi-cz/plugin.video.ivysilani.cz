@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.3.6">
+﻿<addon id="plugin.video.ivysilani.cz" name="iVysílání" provider-name="waladir" version="2.3.7">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
     <import addon="script.module.inputstreamhelper" version="0.4.2"/>
@@ -15,6 +15,10 @@ Doplněk pro iVysílání České televize
     </description>    
     <platform>all</platform>
     <news>
+v2.3.7 (19.10.2026)
+- úprava načítání titulků (od kolalok)
+- v Kodi s ISA 21.5+ přidaná možnost přehrávání streamu s DRM (od brozikcz)
+
 v2.3.6 (8.9.2026)
 - změna typu streamu pro živé vysílání z DASH na HLS
 
@@ -26,9 +30,6 @@ v2.3.4 (18.7.2026)
 
 v2.3.3 (18.7.2026)
 - oprava chyby v Kodi Leia
-
-v2.3.2 (24.6.2026)
-- odstranění persistent query (díky Skyjet)
 </news>
     <assets>
         <icon>icon.png</icon>

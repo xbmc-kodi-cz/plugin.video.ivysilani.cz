@@ -61,7 +61,6 @@ def list_program(label, channel, day_min):
         tz_offset = int(time.mktime(datetime.now().timetuple())-time.mktime(datetime.utcnow().timetuple()))
         for channel_program in data:
             for item in channel_program['program']:
-                print(item)
                 startTime = time.mktime(time.strptime(item['start'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset
                 endTime = time.mktime(time.strptime(item['end'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset
                 if 'playableFrom' in item and len(str(item['playableFrom'])) > 0 and time.mktime(time.strptime(item['start'][:-5], '%Y-%m-%dT%H:%M:%S')) + tz_offset > time.time():

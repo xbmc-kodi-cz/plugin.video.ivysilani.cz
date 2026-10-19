@@ -1,3 +1,7 @@
+v2.3.7 (19.10.2026)
+- úprava načítání titulků (od kolalok)
+- v Kodi s ISA 21.5+ přidaná možnost přehrávání streamu s DRM (od brozikcz)
+
 v2.3.6 (8.9.2026)
 - změna typu streamu pro živé vysílání z DASH na HLS
 
@@ -9,6 +13,3 @@ v2.3.4 (18.7.2026)
 
 v2.3.3 (18.7.2026)
 - oprava chyby v Kodi Leia
-
-v2.3.2 (24.6.2026)
-- odstranění persistent query (díky Skyjet)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys
 import xbmc
+import xbmcaddon
 
 try:
     from urllib.parse import urlencode
@@ -39,4 +40,16 @@ def encode(string_to_encode):
     
 def get_kodi_version():
     return int(xbmc.getInfoLabel('System.BuildVersion').split('.')[0])  
+
+def get_isa_version():
+    version = 0
+    if xbmc.getCondVisibility('System.HasAddon(inputstream.adaptive)') == 1:
+        addon = xbmcaddon.Addon('inputstream.adaptive')
+        parts = addon.getAddonInfo('version').split('.')
+        if len(parts) > 0:
+            if len(parts) > 1:
+                version = float(parts[0] + '.' + parts[1])
+            else:
+                version = float(parts[0])
+    return version
       
