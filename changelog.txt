@@ -1,3 +1,6 @@
+v2.3.8 (20.10.2026)
+- úprava DRM proxy (od drake127)
+
 v2.3.7 (19.10.2026)
 - úprava načítání titulků (od kolalok)
 - v Kodi s ISA 21.5+ přidaná možnost přehrávání streamu s DRM (od brozikcz)
@@ -10,6 +13,3 @@ v2.3.5 (15.8.2026)
 
 v2.3.4 (18.7.2026)
 - oprava závislosti
-
-v2.3.3 (18.7.2026)
-- oprava chyby v Kodi Leia

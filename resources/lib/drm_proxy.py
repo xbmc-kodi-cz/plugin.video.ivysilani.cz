@@ -339,21 +339,32 @@ class ManifestAdapter:
         return first, last, groups
 
     def _static_manifest(self, root, periods):
-        # Preserve source periods, protection data and complete timelines.
-        # A representation-level init override inherits the rest in ISA.
-        for index, period in enumerate(periods):
-            for spec in _specs(root, period, self.source_effective_url):
-                if not spec['protected']:
+        for period in periods:
+            by_id = {spec['id']: spec for spec in _specs(root, period, self.source_effective_url)}
+            for adaptation in period.findall('d:AdaptationSet', drm.DASH):
+                protected = [by_id[r.attrib['id']] for r in adaptation.findall('d:Representation', drm.DASH)
+                             if by_id[r.attrib['id']]['protected']]
+                if not protected:
                     continue
-                attributes = spec['template']
-                first = int(attributes.get('startNumber', '1'))
-                name = drm._media_name(attributes['initialization'], spec['representation'], first, 0)
-                init_id = hashlib.sha256(('{}:{}'.format(index, spec['id'])).encode()).hexdigest()[:32]
-                self.initializations[init_id] = (urljoin(spec['base'], name), None, spec, first, None)
-                template = spec['representation'].find('d:SegmentTemplate', drm.DASH)
-                if template is None:
-                    template = ET.SubElement(spec['representation'], _tag('SegmentTemplate'))
-                template.set('initialization', self.local_url + '/init/' + init_id + '.mp4')
+                first = int(protected[0]['template'].get('startNumber', '1'))
+                kid = self._metadata(protected[0], first)['kid']
+                cenc_cp = next((cp for cp in adaptation.findall('d:ContentProtection', drm.DASH)
+                                if cp.get('value') == 'cenc' or cp.get('schemeIdUri') == 'urn:mpeg:dash:mp4protection:2011'), None)
+                if cenc_cp is None:
+                    cenc_cp = ET.Element(_tag('ContentProtection'),
+                                         {'schemeIdUri': 'urn:mpeg:dash:mp4protection:2011', 'value': 'cenc'})
+                    adaptation.insert(0, cenc_cp)
+                cenc_cp.set('{{{}}}default_KID'.format(CENC), str(uuid.UUID(bytes=kid)))
+                template = adaptation.find('d:SegmentTemplate', drm.DASH)
+                if template is not None:
+                    template.set('initialization', self.local_url + '/init/$RepresentationID$.mp4')
+                for spec in protected:
+                    name = drm._media_name(spec['template']['initialization'], spec['representation'], first, 0)
+                    self.initializations[spec['id']] = (urljoin(spec['base'], name), None, spec, first, None)
+                    if template is None:
+                        rep_template = spec['representation'].find('d:SegmentTemplate', drm.DASH)
+                        if rep_template is not None:
+                            rep_template.set('initialization', self.local_url + '/init/' + spec['id'] + '.mp4')
         if not self.initializations:
             raise ValueError('No protected representations')
         base = root.find('d:BaseURL', drm.DASH)

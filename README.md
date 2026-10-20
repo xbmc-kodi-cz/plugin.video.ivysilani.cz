@@ -2,6 +2,9 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.3.8 (20.10.2026)<br>
+- úprava DRM proxy (od drake127)<br><br>
+
 v2.3.7 (19.10.2026)<br>
 - úprava načítání titulků (od kolalok)<br>
 - v Kodi s ISA 21.5+ přidaná možnost přehrávání streamu s DRM (od brozikcz)<br><br>
@@ -14,7 +17,4 @@ v2.3.5 (15.8.2026)<br>
 
 v2.3.4 (18.7.2026)<br>
 - oprava závislosti<br><br>
-
-v2.3.3 (18.7.2026)<br>
-- oprava chyby v Kodi Leia<br><br>
 </p>
