@@ -2,6 +2,9 @@
 <p>
 <h3>Kodi doplněk pro iVysílání</h3>
 <p>
+v2.3.9 (23.10.2026)<br>
+- oprava překlepu<br><br>
+
 v2.3.8 (20.10.2026)<br>
 - úprava DRM proxy (od drake127)<br><br>
 
@@ -14,7 +17,4 @@ v2.3.6 (8.9.2026)<br>
 
 v2.3.5 (15.8.2026)<br>
 - přidání archivu ČT4 Sport Plus<br><br>
-
-v2.3.4 (18.7.2026)<br>
-- oprava závislosti<br><br>
 </p>

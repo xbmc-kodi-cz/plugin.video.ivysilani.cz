@@ -26,7 +26,7 @@ if len(sys.argv) > 1:
 
 def play_channel(channelId):
     endpoint = 'https://api.ceskatelevize.cz/video/v1/playlist-live/v1/stream-data/channel/' + channelId
-    options = '?canPlayDrm=fale&quality=web&maxQualityCount=5'
+    options = '?canPlayDrm=false&quality=web&maxQualityCount=5'
     data = call_api(url = endpoint + options + '&streamType=hls')
     manifest_type = 'hls'
     isa = get_isa_version()
